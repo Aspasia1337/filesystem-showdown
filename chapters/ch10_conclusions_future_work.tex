@@ -1,0 +1,43 @@
+\chapter{Conclusiones y trabajo futuro}
+
+El presente trabajo de fin de grado ha cumplido con creces las expectativas iniciales, alcanzando todos los objetivos planteados, tanto en el análisis de los sistemas de ficheros como en la creación de un entorno de pruebas adecuado y la elaboración de directrices para la selección del sistema de ficheros más apropiado según su uso específico. Este proceso se ha llevado a cabo siguiendo una secuencia de pasos clara y estructurada.
+
+En primer lugar, se realizó un estudio exhaustivo del ámbito de los sistemas de ficheros en Linux y su uso actual. A partir de estos resultados, se seleccionaron los sistemas de ficheros a analizar y se procedió a un estudio detallado de sus características, poniendo especial énfasis en las particularidades que los hacen únicos y los distinguen entre sí.
+
+Posteriormente, se diseñó un entorno específico y controlado para la ejecución de las pruebas de cada sistema de ficheros, minimizando al máximo los posibles errores o fallos que pudieran surgir dentro de los recursos disponibles.
+
+Una vez realizadas las pruebas de manera meticulosa, se llevó a cabo una evaluación exhaustiva de los resultados, obteniendo dos tipos de análisis: uno comparativo y otro que proporcionó conclusiones significativas sobre el comportamiento individual de cada sistema de ficheros.
+
+Finalmente, se extrajeron conclusiones valiosas que no solo facilitarán la toma de decisiones en futuros proyectos, sino que también servirán como base para la continuación de los estudios de rendimiento de sistemas de ficheros en entornos Linux. Estas conclusiones ofrecen una guía práctica para la selección y uso óptimo de sistemas de ficheros, y sugieren posibles áreas de investigación futura que pueden explorar mejoras y nuevas aplicaciones en este campo.
+
+\section{Aspectos éticos e impacto social}
+
+Desde una perspectiva ética, este trabajo se ha llevado a cabo siguiendo las mejores prácticas según los estándares científicos. Además, se ha mantenido una actitud crítica hacia el mismo, evaluando el enfoque, método y resultados del trabajo.
+
+El impacto social de este trabajo es difícil de evaluar, ya que dependerá principalmente del alcance que logre. Teóricamente, el impacto podría ayudar a que los centros de datos sean más eficientes, ya que el objetivo de esta comparativa es determinar cuál de los sistemas de ficheros probados ofrece el mejor rendimiento. Si los servidores son más eficientes, se podría utilizar menos hardware y consumir menos energía, lo que llevaría a una menor contaminación de los centros de datos y, por ende, a un menor impacto ambiental. Incluso un pequeño cambio en el rendimiento podría significar grandes diferencias en el consumo de energía en un centro de datos con miles de servidores.
+
+\section{Reflexión}
+
+Al reflexionar sobre el trabajo realizado, hay varios aspectos que podrían haberse mejorado. Entre ellos está el hecho de que ZFS mostró diferencias significativas en los resultados entre las repeticiones del experimento. Para obtener números más fiables de esta prueba, debería haberse ejecutado más repeticiones y cada repetición debería haberse realizado con un mayor tamaño, de incluso 64GB o 128GB, pudiendo ver así el punto de caída del sistema de ficheros en comparación con los demás.
+
+La configuración del hardware utilizada en el experimento podría haber sido diferente para ofrecer resultados más fiables. Un controlador RAID con una configuración de paso directo habría sido mejor que la solución de utilizar un único disco de estado sólido para realizar las pruebas. Esto, además de ser la configuración común en un servidor, evitaría cualquier metadato innecesario en los discos y, en su lugar, daría acceso completo directamente al disco. Esto simularía mejor cómo se utilizarían Btrfs y ZFS en un escenario del mundo real. También se podrían haber probado SSDs además de discos mecánicos, ya que los SSDs están ganando popularidad en el uso de servidores.
+
+\section{Trabajo futuro}
+
+Los experimentos en este trabajo han mostrado que ZFS, en general, no tiene un rendimiento tan bueno como los otros sistemas de ficheros probados. Si esto se debe únicamente a la implementación de ZFS en Linux no se puede determinar a partir del trabajo, ya que es la única plataforma probada. Para trabajos futuros, se podría realizar una inspección más detallada para encontrar las causas del menor rendimiento. Esto podría hacerse mediante el uso de perfiles, que es un análisis donde, entre otras cosas, se pueden medir la frecuencia y duración de las llamadas a funciones. Esto podría mostrar en qué parte del código se pasa más tiempo para ayudar a explicar la diferencia en el rendimiento promedio.
+
+Otro punto interesante a examinar es si el problema de rendimiento de ZFS es una cuestión exclusiva de la implementación en Linux. Esto se podría investigar realizando una comparación de rendimiento de ZFS en diferentes plataformas. Los resultados podrían compararse con los de este trabajo de fin de grado para estimar si la implementación en Linux es la razón de los resultados o si pueden estar involucrados otros factores.
+
+Debido a la falta de tiempo y a ser más propio de una tesis, en este trabajo de fin de grado no se pudieron realizar pruebas con discos de estado sólido NVMe. Sería interesante ver una prueba de rendimiento similar a la de este trabajo de fin de grado, realizada en un SSD NVMe.
+
+Dado que los experimentos en este trabajo de fin de grado solo utilizan configuraciones predeterminadas para los sistemas de ficheros y prueban el rendimiento general, sería interesante comparar esos resultados con un experimento donde los sistemas de ficheros hayan sido optimizados para una aplicación u operación específica.
+
+ZFS admite el uso de un SSD como caché adicional para acelerar las lecturas y escrituras desde y hacia discos mecánicos, lo cual Btrfs no tiene soporte incorporado en este momento. Sin embargo, hay soporte para esto en el kernel de Linux, llamado bcache. Un experimento donde se utilicen cachés con un SSD adicional como caché sería, por lo tanto, interesante.
+
+Además, sería beneficioso utilizar tanto herramientas de macro como de micro benchmarking para obtener una visión más completa del rendimiento de los sistemas de ficheros bajo diferentes cargas de trabajo y condiciones operativas. Además de realizar pruebas con diversos tipos de archivos e identificar cómo interactúan estos con los algoritmos de compresión y deduplicación.
+
+La opción de compresión LZO en Btrfs podría proporcionar un aumento significativo en el rendimiento. Sería útil probar esta característica en volúmenes para evaluar su desempeño en configuraciones más complejas. Realizar experimentos con volúmenes mucho más grandes de los examinados en este estudio ayudaría a determinar el alcance del objetivo principal de Btrfs como sistema de ficheros escalable.
+
+Investigar características adicionales de Btrfs y ZFS, como el soporte RAID, las instantáneas y la deduplicación, sería valioso para comprender completamente las capacidades de estos sistemas. Analizar el rendimiento de los sistemas de ficheros en un entorno de red podría revelar ventajas adicionales como servidores de archivos, especialmente para aplicaciones distribuidas y de alta concurrencia.
+
+Dado el uso extensivo de la virtualización en entornos de computación modernos, sería interesante investigar cómo se comportan Btrfs, EXT4, XFS y ZFS en entornos virtualizados. Explorar cómo diferentes configuraciones de hardware, como el uso de SSDs versus SSDs NVMe, afectan el rendimiento de los sistemas de ficheros. Evaluar el impacto de la fragmentación a largo plazo en el rendimiento y la eficiencia de los sistemas de ficheros, especialmente para Btrfs y ZFS, que incluyen mecanismos de mitigación de fragmentación, es una dirección prometedora para futuros estudios.

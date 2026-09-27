@@ -1,0 +1,70 @@
+\chapter{Introducción}\label{sec:capítulo_1}
+
+La gestión eficiente del almacenamiento de datos es una preocupación central en una amplia gama de sistemas informáticos, abarcando desde entornos de bases de datos hasta plataformas de computación en la nube, cada uno con necesidades específicas en cuanto a tipos de datos, capacidades de almacenamiento y requisitos de rendimiento. Los sistemas de ficheros, como componentes cruciales de los sistemas operativos, proporcionan la infraestructura necesaria para organizar y acceder a los datos de manera eficiente.\\
+
+En el ámbito de los sistemas operativos Linux, se ha observado una evolución significativa de los sistemas de ficheros. Desde el sistema clásico ext hasta opciones más avanzadas como Btrfs y XFS, la evolución de los sistemas de ficheros en Linux refleja una constante búsqueda de mejoras en rendimiento, confiabilidad y escalabilidad para adaptarse a las demandas cambiantes de la computación moderna \cite{ext4-wiki,btrfs-docs,xfs-wiki}.\\
+
+La diversidad de necesidades computacionales ha impulsado el desarrollo de sistemas de ficheros con capacidades variadas. Por ejemplo, en entornos de computación en la nube, donde la redundancia y la disponibilidad de datos son críticas, se utilizan ampliamente sistemas de ficheros distribuidos como HDFS (Hadoop Distributed File System). En contraste, los entornos de bases de datos de alto rendimiento demandan sistemas de ficheros como XFS, que están optimizados para realizar operaciones de entrada/salida de manera eficiente \cite{hdfs-wiki,xfs-wiki}.\\
+
+Ante la variedad de sistemas de ficheros disponibles y las diferentes demandas de los entornos de computación, surge la necesidad de evaluar y comparar su rendimiento en escenarios reales. Los estudios que analizan el rendimiento de los sistemas de ficheros bajo diversas condiciones proporcionan información valiosa, asistiendo a administradores de sistemas y desarrolladores en la toma de decisiones informadas sobre la selección del sistema de ficheros más adecuado según las necesidades específicas de sus aplicaciones y cargas de trabajo.\\
+
+\section{Objetivos y alcance}
+
+Este trabajo de investigación tiene como propósito principal llevar a cabo un estudio exhaustivo y comparativo de los sistemas de ficheros más relevantes en entornos Linux. Se busca evaluar sus capacidades, rendimiento y características distintivas, con el objetivo de proporcionar una guía detallada y práctica para la selección y configuración de estos sistemas en diversos entornos y aplicaciones.
+
+\subsection{Subobjetivos}
+
+Para alcanzar el objetivo principal, se establecen los siguientes subobjetivos:
+
+\begin{enumerate}
+    \item \textbf{Análisis cualitativo:} Investigar de manera detallada las características fundamentales de los sistemas de ficheros más populares, proporcionando insights profundos sobre su funcionalidad y aplicabilidad en contextos reales.
+    
+    \item \textbf{Revisión de mercado:} Examinar los sistemas de ficheros predominantes en el mercado, evaluando su relevancia y adaptabilidad al panorama tecnológico actual.
+    
+    \item \textbf{Ambiente experimental controlado:} Crear un entorno experimental controlado para garantizar la integridad de los datos obtenidos, eliminando posibles interferencias externas.
+    
+    \item \textbf{Experimentación práctica:} Diseñar y ejecutar una serie de pruebas para medir el rendimiento real de los sistemas de ficheros bajo escenarios de uso típicos y especializados.
+    
+    \item \textbf{Análisis de validez:} Identificar y mitigar potenciales amenazas a la validez de los experimentos, discutiendo cómo las contramedidas implementadas podrían influir en los resultados finales.
+    
+    \item \textbf{Evaluación y recomendaciones:} Analizar los datos experimentales para formular recomendaciones basadas en el rendimiento observado, destacando el impacto práctico de los sistemas de ficheros en diferentes configuraciones.
+    
+    \item \textbf{Síntesis comparativa:} Utilizar los resultados del estudio para realizar una comparación crítica con investigaciones previas, buscando identificar tendencias emergentes y patrones de comportamiento en el uso de sistemas de ficheros.
+\end{enumerate}
+
+La incorporación de estos subobjetivos mejorará significativamente la capacidad del estudio para llevar a cabo una evaluación exhaustiva y práctica de los sistemas de archivos en entornos Linux. Esto tendrá un impacto directo en la optimización de recursos y en la elección de tecnologías de almacenamiento.
+
+\section{Competencias}
+
+Las siguientes competencias han sido desarrolladas a lo largo del proyecto, atribuidas tanto al \textbf{Grado de Ingeniería Informática} como a la \textbf{Intensificación de Ingeniería de Computadores}:\\
+
+\textbf{[CO5] Conocimiento, administración y mantenimiento de sistemas, servicios y aplicaciones informáticas:} Esta competencia es fundamental para la comprensión y gestión eficiente del almacenamiento de datos en sistemas Linux, abordando aspectos teóricos y prácticos de los sistemas de ficheros.\\
+
+\textbf{[CO10] Conocimiento de las características, funcionalidades y estructura de los sistemas operativos y diseñar e implementar aplicaciones basadas en sus servicios:} Esta competencia implica comprender en profundidad las características y funcionalidades de los sistemas operativos, así como su aplicación en el diseño e implementación de aplicaciones que aprovechen los sistemas de ficheros.\\
+
+\textbf{[IC5] Capacidad de analizar, evaluar y seleccionar las plataformas hardware y software más adecuadas para el soporte de aplicaciones empotradas y de tiempo real:} Esta competencia se centra en la evaluación y selección de plataformas hardware y software para optimizar el rendimiento de los sistemas de ficheros en situaciones específicas, como aplicaciones empotradas y de tiempo real.\\
+
+\textbf{[IC7] Capacidad para analizar, evaluar, seleccionar y configurar plataformas hardware para el desarrollo y ejecución de aplicaciones y servicios informáticos:} Esta competencia involucra habilidades para analizar, evaluar y configurar plataformas hardware con el fin de optimizar el entorno de ejecución de los sistemas de ficheros seleccionados.
+
+\section{Estructura del documento}
+El presente trabajo sigue una estructura organizada en capítulos que facilita una comprensión clara y sistemática de su contenido.
+
+\begin{itemize}
+    \item El \textbf{\hyperref[sec:capítulo_1]{capítulo 1}} introduce al lector en el tema de la investigación, proporcionando una visión general de los objetivos y alcance del estudio.
+    
+    \item El \textbf{\hyperref[sec:capítulo_2]{capítulo 2}} presenta una revisión exhaustiva del estado del arte en relación con los sistemas de ficheros en Linux. Se abordan aspectos como la organización de los datos en disco, los sistemas de ficheros en Linux y sus características principales, proporcionando así un contexto sólido para la comprensión del tema.
+    
+    \item El \textbf{\hyperref[sec:capítulo_3]{capítulo 3}} presenta una descripción detallada de los sistemas de ficheros seleccionados para el análisis. Se discute el motivo de su elección y se profundiza en su estructura interna y características distintivas.
+    
+    \item El \textbf{\hyperref[sec:capítulo_4]{capítulo 4}} se centra en la identificación de los escenarios de prueba que se llevarán a cabo para evaluar el rendimiento de los sistemas de ficheros seleccionados. Se describen las pruebas a realizar, así como los tipos de ficheros y la configuración técnica utilizada.
+    
+    \item El \textbf{\hyperref[sec:capítulo_5]{capítulo 5}} aborda los desafíos relacionados con la fiabilidad de los resultados obtenidos en las pruebas. Se discuten aspectos como la validez de la conclusión, la validez interna y externa, así como posibles sesgos y amenazas a la validez de los datos.
+    
+    \item Se incluye un \textbf{\hyperref[sec:glosario]{glosario}} que define los términos técnicos utilizados a lo largo del documento, proporcionando una referencia útil para el lector.
+    
+    \item Se adjunta un \textbf{\hyperref[sec:anexo]{anexo}} que contiene información adicional relevante para la comprensión del estudio, como datos técnicos específicos o detalles adicionales sobre las pruebas realizadas.
+    
+    \item Finalmente, se incluye la bibliografía del trabajo, garantizando la transparencia y credibilidad del estudio comparativo.
+\end{itemize}
+
+Esta estructura proporciona una guía clara y ordenada para la navegación a través del documento, permitiendo al lector comprender fácilmente el desarrollo y los resultados del estudio.

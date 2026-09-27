@@ -1,0 +1,130 @@
+\chapter{Conclusiones de los Resultados}
+
+Este capítulo presenta las conclusiones derivadas de las pruebas de rendimiento de los sistemas de archivos Btrfs, Ext4, XFS y ZFS, evaluando sus capacidades y limitaciones bajo diferentes condiciones de uso. A continuación, se destacan los hallazgos principales y se justifican los resultados obtenidos.
+
+\section{Rendimiento en Lectura}
+
+En las pruebas de lectura, \textbf{Btrfs mostró un rendimiento superior en la lectura de archivos pequeños}, alcanzando un promedio de 12.21 MB/s, lo que representa un 40\% más que Ext4 y un 63\% más que XFS. ZFS, aunque se beneficia de sus características de integridad y cifrado, tuvo un rendimiento promedio significativamente menor (4.58 MB/s), penalizado por sus algoritmos de cifrado e integridad.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en lectura}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 8.70          & \textbf{12.21} & 7.50         & 4.58         \\ \hline
+Mejora vs EXT4    & -             & \textbf{40\%}  & -14\%        & -47\%        \\ \hline
+Mejora vs Btrfs   & -29\%         & -              & -39\%        & -62\%        \\ \hline
+Mejora vs XFS     & 16\%          & \textbf{63\%}  & -            & -39\%        \\ \hline
+Mejora vs ZFS     & 90\%          & \textbf{167\%} & 64\%         & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Relectura}
+
+En las pruebas de relectura, \textbf{Btrfs nuevamente destacó}, alcanzando un promedio de rendimiento de 13.37 MB/s, superando en un 45\% a Ext4 y en un 46\% a XFS. La eficiencia de la subasignación de bloques y la gestión de caché contribuyeron a estos resultados. ZFS, aunque mejoró respecto a la lectura (5.60 MB/s), continuó mostrando un rendimiento inferior debido a sus métodos de respaldo y cifrado.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en relectura}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 9.20          & \textbf{13.37} & 9.18         & 5.60         \\ \hline
+Mejora vs EXT4    & -             & \textbf{45\%}  & 0\%          & -39\%        \\ \hline
+Mejora vs Btrfs   & -31\%         & -              & -31\%        & -58\%        \\ \hline
+Mejora vs XFS     & 0\%           & \textbf{46\%}  & -            & -39\%        \\ \hline
+Mejora vs ZFS     & 64\%          & \textbf{139\%} & 64\%         & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Lectura Estratificada}
+
+\textbf{Btrfs se destacó nuevamente en las pruebas de lectura estratificada}, alcanzando un promedio de rendimiento de 12.08 MB/s, superando en un 41\% a Ext4 y en un 42\% a XFS. La eficiencia de la subasignación de bloques y la gestión de caché contribuyeron a estos resultados. ZFS, aunque mejoró respecto a la lectura (2.30 MB/s), continuó mostrando un rendimiento inferior debido a sus métodos de respaldo y cifrado.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en lectura estratificada}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 8.54          & \textbf{12.08} & 8.52         & 2.30         \\ \hline
+Mejora vs EXT4    & -             & \textbf{41\%}  & 0\%          & -73\%        \\ \hline
+Mejora vs Btrfs   & -29\%         & -              & -29\%        & -81\%        \\ \hline
+Mejora vs XFS     & 0\%           & \textbf{42\%}  & -            & -73\%        \\ \hline
+Mejora vs ZFS     & 271\%         & \textbf{425\%} & 270\%        & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Lectura Aleatoria}
+
+En las pruebas de lectura aleatoria, \textbf{Btrfs nuevamente destacó}, alcanzando su rendimiento máximo con archivos de 32 kB, significativamente antes que en la prueba de lectura secuencial. El promedio de rendimiento de Btrfs fue de 11.07 MB/s, superando en un 45\% a Ext4 y en un 45\% a XFS. La eficiencia de la subasignación de bloques y la gestión de caché contribuyeron a estos resultados. ZFS, aunque mejoró respecto a la lectura secuencial (3.41 MB/s), continuó mostrando un rendimiento inferior debido a sus métodos de respaldo y cifrado.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en lectura aleatoria}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 7.61          & \textbf{11.07} & 7.64         & 3.41         \\ \hline
+Mejora vs EXT4    & -             & \textbf{45\%}  & 0\%          & -55\%        \\ \hline
+Mejora vs Btrfs   & -31\%         & -              & -31\%        & -69\%        \\ \hline
+Mejora vs XFS     & 0\%           & \textbf{45\%}  & -            & -55\%        \\ \hline
+Mejora vs ZFS     & 123\%         & \textbf{225\%} & 124\%        & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Escritura}
+
+Para las operaciones de escritura, \textbf{Btrfs sobresalió en archivos pequeños}, con un promedio de 4.12 MB/s, superando a Ext4 en un 67\% y a XFS en un 44\%. Esto se debe a su escritura diferida y la compartición de bloques, técnicas que permiten agrupar múltiples operaciones de escritura y optimizar el uso del espacio en disco. XFS mostró el mejor rendimiento en escrituras de archivos grandes debido a sus grupos de asignación, con un rendimiento máximo de 5.56 MB/s.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en escritura}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 2.90         & \textbf{4.03}  & 2.79         & 2.38         \\ \hline
+Mejora vs EXT4    & -            & \textbf{39.19\%} & -3.52\%    & -17.71\%     \\ \hline
+Mejora vs Btrfs   & -28.14\%     & -               & -30.68\%    & -40.87\%     \\ \hline
+Mejora vs XFS     & 3.64\%       & \textbf{44.23\%} & -          & -14.69\%     \\ \hline
+Mejora vs ZFS     & 21.48\%      & \textbf{68.99\%} & 17.20\%    & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Reescritura}
+
+La reescritura mostró un rendimiento superior en todos los sistemas de archivos debido a la eliminación de la necesidad de recrear la tabla de asignación de bloques y la escritura diferida. \textbf{Btrfs lideró nuevamente} con un promedio de 13.37 MB/s, superando a Ext4 en un 45\% y a XFS en un 46\%. ZFS, aunque mejoró, siguió mostrando el rendimiento más bajo (5.60 MB/s).
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en reescritura}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 9.20          & \textbf{13.37} & 9.18         & 5.60         \\ \hline
+Mejora vs EXT4    & -             & \textbf{45\%}  & 0\%          & -39\%        \\ \hline
+Mejora vs Btrfs   & -31\%         & -              & -31\%        & -58\%        \\ \hline
+Mejora vs XFS     & 0\%           & \textbf{46\%}  & -            & -39\%        \\ \hline
+Mejora vs ZFS     & 64\%          & \textbf{139\%} & 64\%         & -            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Rendimiento en Escritura Aleatoria}
+
+La escritura aleatoria mostró variaciones significativas en el rendimiento entre los diferentes sistemas de archivos. \textbf{Btrfs lideró nuevamente} con un promedio de 5.43 MB/s, superando a Ext4 en un 29\% y a XFS en un 25\%. ZFS, aunque mejoró, siguió mostrando el rendimiento más bajo (1.91 MB/s).
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de rendimiento en escritura aleatoria}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{EXT4} & \textbf{Btrfs} & \textbf{XFS} & \textbf{ZFS} \\ \hline
+Promedio (MB/s)   & 4.22          & \textbf{5.43}  & 4.35         & 1.91         \\ \hline
+Mejora vs EXT4    & -             & \textbf{29\%}  & 3\%          & -55\%        \\ \hline
+Mejora vs Btrfs   & -22\%         & -              & -20\%        & -65\%        \\ \hline
+Mejora vs XFS     & -3\%          & \textbf{25\%}  & -            & -56\%        \\ \hline
+Mejora vs ZFS     & 121\%         & \textbf{184\%} & 127\%        & -            \\ \hline
+\end{tabular}
+\end{table}
+

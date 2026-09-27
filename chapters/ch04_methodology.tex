@@ -1,0 +1,158 @@
+\chapter{Enfoque y metodología}\label{sec:capítulo_4}
+
+Este capítulo describe el enfoque metodológico adoptado para comparar los sistemas de archivos ext4, Btrfs, XFS y ZFS bajo sus configuraciones predeterminadas. Se diseñó una batería de pruebas para evaluar la capacidad de estos sistemas para manejar operaciones básicas de entrada/salida, como lectura y escritura, así como pruebas especializadas, como la lectura estratificada y la lectura hacia atrás, para examinar el comportamiento bajo condiciones más exigentes.\\
+
+Debido a las limitaciones de tiempo y recursos de un trabajo de fin de grado, se seleccionó Iozone como la herramienta principal para la evaluación del rendimiento. Esta elección se justifica por la practicidad y eficacia de Iozone, así como su amplia utilización en investigaciones sobre el rendimiento de los sistemas de archivos. La robustez de Iozone está documentada en estudios de investigadores destacados como Jan Kara \cite{kara2010btrfs} y Dominique A. Heger \cite{heger2012fs}. La relevancia de estos trabajos y su relación con la presente investigación se discuten en detalle en la sección de \hyperref[sec:trabajos relacionados]{Trabajos relacionados}, proporcionando un marco teórico que respalda las metodologías utilizadas.\\
+
+La integración de pruebas estándar y especializadas permitirá una evaluación comprensiva de cada sistema de archivos, asegurando que los resultados sean representativos de sus capacidades en escenarios de uso real y controlados.
+
+\section{Selección de la herramienta de evaluación}
+
+La elección de la herramienta adecuada para evaluar el rendimiento de los sistemas de archivos es crucial. Las herramientas disponibles se dividen en dos categorías principales: aplicaciones de uso real y herramientas de evaluación sintéticas. Mientras que las aplicaciones reales pueden ofrecer una visión precisa del rendimiento en contextos específicos, encontrar una aplicación perfectamente representativa y adaptable a todas las configuraciones de sistema es complejo y consume mucho tiempo. Las herramientas sintéticas, aunque no simulan directamente cargas de trabajo reales, permiten evaluar el rendimiento bajo una variedad controlada de condiciones mediante la manipulación de parámetros de prueba.\\
+
+Iozone, una herramienta sintética, se seleccionó debido a su capacidad para ajustar detalladamente el tamaño del archivo y el patrón de acceso, lo que permite medir el rendimiento de lectura y escritura de manera exhaustiva y flexible. Esta herramienta es eficiente para generar y medir una serie de operaciones de archivo bajo demanda, posibilitando la evaluación sistemática de cada sistema de archivos en condiciones idénticas y repetibles. Además, Iozone ha sido ampliamente validada en la comunidad científica y técnica, como lo demuestran estudios previos incluidos en la sección \hyperref[sec:trabajos relacionados]{Trabajos relacionados}.
+
+\subsection{Descripción y uso de Iozone}
+
+Iozone es una herramienta ampliamente reconocida por su capacidad para adaptar exhaustivamente las pruebas de rendimiento a las necesidades específicas de cualquier sistema de archivos. Utiliza una variedad de operaciones de prueba para medir el rendimiento de E/S, incluyendo lectura, escritura, relectura, reescritura y operaciones especializadas como mmap y acceso de E/S asíncrono.\\
+
+\begin{tcolorbox}[title=Código de ejemplo para Iozone, fonttitle=\bfseries, colback=gray!5!white, colframe=gray!75!black]
+\begin{footnotesize}
+\begin{verbatim}
+# Comando para una prueba exhaustiva con Iozone
+iozone -Raz -i0 -i1 -i2 -i3 -i4 -i5 -i8 -g32G -f /mnt/testfile -b ext4_00.xls
+64 128 256 512 1024 2048 4096 8192 16384
+
+8192  3737270 3688723 3782110 3653812 3229054 2394606 1893744 1762507
+16384 3766316 3794181 3806792 3738857 3192571 2393255 1849445 1667268
+32768 3807088 3844682 3856008 3782986 3264443 2373819 1816514 1622085
+65536 3864617 3895838 3901866 3825782 3303391 2385889 1815048 1605015
+\end{verbatim}
+\end{footnotesize}
+\end{tcolorbox}
+
+El comando anterior muestra un ejemplo de cómo se puede configurar Iozone para realizar una prueba exhaustiva. Aquí hay una descripción de los parámetros utilizados:
+\begin{itemize}
+    \item \texttt{-R}: Genera un informe en formato Excel.
+    \item \texttt{-a}: Realiza todas las operaciones de prueba disponibles.
+    \item \texttt{-z}: Activa las pruebas para todos los tamaños de registro.
+    \item \texttt{-i0 -i1 -i2 -i3 -i4 -i5 -i8}: Realiza pruebas de lectura, escritura, relectura, reescritura, lectura aleatoria, escritura aleatoria y lectura estratificada.
+    \item \texttt{-g32G}: Establece el tamaño del conjunto de datos para la prueba en 32 GB.
+    \item \texttt{-f /mnt/testfile}: Especifica el archivo de prueba a usar.
+    \item \texttt{-b ext4\_00.xls}: Especifica el nombre del archivo de salida donde se guardarán los resultados de la prueba en formato Excel.
+\end{itemize}
+
+Los números en la parte inferior del código representan el tamaño del bloque de registro (en kbytes) y el rendimiento de E/S (en Kbytes/sec) para cada tamaño de bloque de registro.\\
+
+\subsection{Configuración de prueba de Iozone}
+
+Las pruebas de rendimiento de Iozone se llevarán a cabo utilizando una amplia gama de tamaños de bloque y fichero para evaluar exhaustivamente el rendimiento de los sistemas de archivos en diferentes condiciones.
+
+\begin{tcolorbox}[title=Tamaños de bloque utilizados, colback=blue!5!white, colframe=gray!75!black]
+Los tamaños de bloque son fundamentales para medir el rendimiento de E/S. Iozone ejecutará las operaciones de prueba utilizando los siguientes tamaños de bloque:
+\begin{itemize}
+    \item \textbf{Pequeños}: 4, 8, 16, 32, 64, 128 KB
+    \item \textbf{Medianos}: 256, 512 KB, 1, 2 MB
+    \item \textbf{Grandes}: 4, 8, 16 MB
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Tamaños de fichero utilizados, colback=blue!5!white, colframe=gray!75!black]
+Los tamaños de fichero son otro aspecto importante a considerar. Iozone realizará pruebas con los siguientes tamaños de fichero:
+\begin{itemize}
+    \item \textbf{Pequeños}: 64, 128, 256, 512 KB, 1, 2, 4 MB
+    \item \textbf{Medianos}: 8, 16, 32, 64, 128 MB
+    \item \textbf{Grandes}: 256, 512 MB, 1, 2, 4, 8, 16, 32 GB  
+\end{itemize}
+\end{tcolorbox}
+
+Estos tamaños de bloque y fichero han sido seleccionados para abarcar una amplia variedad de escenarios de uso y proporcionar una evaluación exhaustiva del rendimiento de los sistemas de archivos bajo diferentes condiciones de carga. Cada combinación de tamaño de bloque y fichero permitirá obtener información detallada sobre cómo se comportan los sistemas de archivos en diversas situaciones.
+
+\section{Entorno de evaluación y repetición del experimento}
+
+El estado del sistema durante el proceso de evaluación puede tener un impacto significativo en los resultados obtenidos. Para garantizar condiciones de prueba estables y consistentes, se implementan varias medidas de control y optimización.
+
+\subsection{Control del estado del sistema}
+
+Se llevan a cabo las siguientes acciones para controlar y estabilizar el estado del sistema durante las pruebas:
+\begin{itemize}
+    \item \textbf{Apagado de procesos no esenciales:} Se detienen todos los procesos no esenciales que podrían afectar las mediciones de rendimiento, garantizando así que los recursos del sistema estén dedicados exclusivamente a las pruebas.
+    \item \textbf{Reinicio para pruebas de lectura/escritura:} Para las pruebas de lectura y escritura de archivos y directorios, se reinicia el sistema para eliminar cualquier influencia residual de pruebas anteriores y garantizar la coherencia de los resultados.
+\end{itemize}
+
+\subsection{Configuración de la partición}
+
+Para cada sistema de archivos bajo evaluación, se crea una partición dedicada que ocupa todo el disco disponible utilizando una tabla de particiones GPT. Esta configuración garantiza que cada sistema tenga acceso al máximo espacio disponible y ayuda a prevenir la fragmentación del disco, lo que podría afectar negativamente el rendimiento del sistema de archivos. Después de cada prueba, se borra y se crea una nueva partición para asegurar condiciones consistentes.
+
+\subsubsection{Crear la tabla de particiones}
+
+Para crear la tabla de particiones GPT y una partición usando \texttt{gdisk}, se siguen los siguientes pasos:
+
+\begin{tcolorbox}[title=Comandos para crear la tabla de particiones GPT]
+\begin{verbatim}
+# Crear tabla de particiones GPT y partición usando gdisk
+sudo gdisk /dev/sdX
+o   # Crear nueva tabla de particiones GPT
+n   # Crear nueva partición (todo el disco)
+w   # Escribir cambios y salir
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Crear particiones de sistemas de archivos individuales}
+Para crear las particiones individuales se siguen los siguientes pasos:
+
+\begin{tcolorbox}[title=Comandos para ext4]
+\begin{verbatim}
+# Crear el sistema de archivos ext4
+sudo mkfs.ext4 /dev/sdX1
+
+# Montar la partición
+sudo mount /dev/sdX1 /mnt/ext4_test
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Comandos para Btrfs]
+\begin{verbatim}
+# Crear el sistema de archivos Btrfs
+sudo mkfs.btrfs /dev/sdX1
+
+# Montar la partición
+sudo mount /dev/sdX1 /mnt/btrfs_test
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Comandos para XFS]
+\begin{verbatim}
+# Crear el sistema de archivos XFS
+sudo mkfs.xfs /dev/sdX1
+
+# Montar la partición
+sudo mount /dev/sdX1 /mnt/xfs_test
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Comandos para ZFS]
+\begin{verbatim}
+# Instalar ZFS en Arch Linux
+sudo pacman -S zfs-linux
+
+# Cargar el módulo ZFS
+sudo modprobe zfs
+
+# Crear un pool ZFS
+sudo zpool create zfs_pool /dev/sdX
+
+# Crear un sistema de archivos ZFS
+sudo zfs create zfs_pool/zfs_test
+
+# Montar el sistema de archivos ZFS 
+sudo mount -t zfs zfs_pool/zfs_test /mnt/zfs_test
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection{Repetición del experimento}
+
+Para asegurar la validez y fiabilidad de los resultados, cada prueba se repetirá 10 veces para cada sistema de archivos evaluado. Se calcularán las medias y desviaciones típicas de los resultados obtenidos para mitigar las variaciones aleatorias y garantizar mediciones precisas. Entre cada repetición, el equipo se apagará y se reiniciará para eliminar cualquier efecto residual y mantener un entorno de prueba consistente.\\
+
+Este enfoque metodológico riguroso asegura la coherencia y confiabilidad de los resultados, permitiendo una evaluación precisa del rendimiento de los sistemas de archivos en diversas condiciones y cargas de trabajo.
+

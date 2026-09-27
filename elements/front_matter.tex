@@ -1,0 +1,130 @@
+% -------------------------------
+% Plantilla del TFG en la ESIIAB-UCLM. Versión 0.0 (Preliminar)
+%
+% Luis de la Ossa
+% 
+% Compilar con XeLaTeX 
+% -------------------------------
+
+
+% -------------------------------
+% Segunda portada
+% -------------------------------
+\cleardoublepage
+\setcounter{page}{1} \null
+
+\begin{textblock*}{3cm}(3cm,2cm) 
+\begin{flushleft}
+\includegraphics[height=2cm]{figs/logouclm.png}
+\end{flushleft}
+\end{textblock*}
+
+
+\begin{textblock*}{2.5cm}(15.95cm,2.45cm) 
+\begin{flushright}
+\includegraphics[height=1.4cm]{figs/euroinf.jpg}
+\end{flushright}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(14cm,2cm)  % Corrige la posición porque la imagen tiene margen
+\begin{flushright}
+\includegraphics[height=2cm]{figs/logoesii.png}
+\end{flushright}
+\end{textblock*}
+
+
+
+\begin{textblock*}{\textwidth}(3cm,8cm) 
+\begin{center}\doublespacing 
+{\fontsize{18pt}{4pt}\selectfont \bft{TRABAJO FIN DE GRADO}}
+
+\medskip
+{\fontsize{18pt}{4pt}\selectfont Grado en Ingeniería Informática}
+
+\medskip
+{\fontsize{16pt}{4pt}\selectfont \espec}
+\end{center}
+\end{textblock*}
+
+
+\begin{textblock*}{\textwidth}(3cm,14cm) 
+\begin{center}\setstretch{2}
+{\fontsize{22pt}{4pt}\selectfont \bft{\titulo}}
+\end{center}
+\end{textblock*}
+
+
+\begin{textblock*}{\textwidth}(3cm,20.5cm) 
+\begin{flushleft}\doublespacing
+{\fontsize{14pt}{4pt}\selectfont \bft{Autor:} \autor}
+
+{\fontsize{14pt}{4pt}\selectfont \bft{Tutor:} \director}
+
+{\fontsize{14pt}{4pt}\selectfont \bft{Co-Tutor:} \codirector}
+\end{flushleft}
+\end{textblock*}
+
+
+\begin{textblock*}{\linewidth}(3cm,25cm) 
+\begin{flushright}
+{\fontsize{14pt}{4pt}\selectfont \fecha}
+\end{flushright}
+\end{textblock*}
+
+
+% -------------------------------
+% Declaración de autoría
+% -------------------------------
+\cleardoublepage
+\thispagestyle{plain}
+\begin{center}
+\Large{\bft{Declaración de autoría}}
+\end{center}
+\vskip1cm
+
+Yo, \autor, con DNI [NÚMERO DE DNI], declaro que soy el único autor del trabajo fin de grado titulado "Estudio comparativo de sistemas de ficheros
+basados en Linux", que el citado trabajo no infringe las leyes en vigor sobre propiedad intelectual, y que todo el material no original contenido en dicho trabajo está apropiadamente atribuido a sus legítimos autores.
+
+\vspace*{2cm}
+\begin{center}
+Albacete, a \quad \ldots \quad de \quad \ldots \quad de 20 \ldots
+
+\vskip3cm
+
+Fdo.: \autor
+\end{center}
+
+
+% -------------------------------
+% Resumen
+% -------------------------------
+\cleardoublepage
+\thispagestyle{plain}
+\begin{center}
+\Large{\bft{Resumen}}
+\end{center}
+\vskip1cm
+
+
+La selección de un sistema de ficherosadecuado es crucial para lograr una gestión eficiente y efectiva de los datos en el contexto actual de la informática. Es en este marco que surge la idea de este proyecto, cuyo objetivo principal es llevar a cabo un análisis exhaustivo y multidimensional de los sistemas de ficheros relevantes para entornos Linux, abordando tanto sus aspectos teóricos como prácticos.\\
+
+En la fase inicial, realizaremos una investigación minuciosa de los sistemas de ficheros ampliamente empleados en entornos Linux, destacando aquellos que han alcanzado un alto grado de madurez y aceptación. Este análisis se centrará en comprender las características fundamentales de estos Sistemas de Ficheros, evaluando sus ventajas y limitaciones, así como identificando los casos de uso para los cuales están diseñados de manera específica.\\
+
+La siguiente etapa del proyecto implica la selección de un subconjunto de sistemas de ficheros para llevar a cabo un estudio más detallado y profundo. Esta fase de investigación abarcará evaluaciones teóricas de cada sistema. En la práctica, definiremos y ejecutaremos escenarios específicos para realizar pruebas detalladas, que incluirán la ejecución de \textit{benchmarks} para comparar el rendimiento relativo de cada sistema de ficherosen condiciones similares.\\
+
+Además, estas pruebas se llevarán a cabo considerando la interoperabilidad a la que estos sistemas se enfrentan en situaciones del mundo real. Su objetivo es analizar el comportamiento de los sistemas frente a cargas de trabajo muy similares a las que se encontrarían en entornos reales, como entornos de usuario, de alto volumen de datos y concurrencia, o de alto trabajo de lectura y/o escritura.\\
+
+Las conclusiones obtenidas a partir de este estudio proporcionarán una perspectiva informada y detallada para la selección del sistema de ficherosmás adecuado en entornos informáticos específicos. Se tendrán en cuenta no solo las características particulares y requisitos de las aplicaciones, sino también aspectos relacionados con el rendimiento, la escalabilidad y la mantenibilidad.\\
+
+En última instancia, este enfoque integral y meticuloso busca contribuir de manera significativa al conocimiento práctico y a la toma de decisiones en la gestión de sistemas de ficheros para entornos Linux contemporáneos, fortaleciendo así la infraestructura y la eficacia tanto en entornos académicos como empresariales.\\
+
+% -------------------------------
+% Agradecimientos
+% -------------------------------
+\cleardoublepage
+\thispagestyle{plain}
+\begin{center}
+\Large{\bft{Agradecimientos}}
+\end{center}
+\vskip1cm
+

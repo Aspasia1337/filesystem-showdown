@@ -1,0 +1,201 @@
+% -------------------------------
+% Plantilla del TFG en la ESIIAB-UCLM. Versión 0.0 (Preliminar)
+%
+% Luis de la Ossa
+% 
+% Compilar con XeLaTeX 
+% -------------------------------
+\documentclass[12pt, a4paper]{book}
+
+% -------------------------------
+% Información y opciones del documento. Debe editarse.
+% -------------------------------
+\input{include/options}
+
+% -------------------------------
+% Configuración del documento, paquetes, etc.
+% -------------------------------
+\input{include/configuration}
+
+% Paquetes para la bibliografía
+\usepackage[backend=biber, style=ieee, url=true, doi=true]{biblatex} 
+\addbibresource{bib/ref.bib} % Carga el archivo de referencias
+
+% Documento
+\begin{document}
+
+% -------------------------------
+% Portada y título
+% -------------------------------
+% Fuente  de la portada
+% \setmainfont[Ligatures={NoRequired,NoCommon,NoContextual}]{Calibri}
+\input{elements/title_page}
+
+% -------------------------------
+% Fuente del documento.
+% -------------------------------
+% La fuente recomendada es Calibri, pero no está instalada en overleaf:
+%\setmainfont[Ligatures={NoRequired,NoCommon,NoContextual}]{Calibri}
+
+% Para utilizarla aquí, son necesarios los archivos .ttf correspondientes:
+%\setmainfont[
+%            BoldFont=Calibrib.ttf,
+%            ItalicFont=Calibrii.ttf,
+%            BoldItalicFont=Calibriz.ttf
+%        ]{Calibri.ttf}
+
+% Por defecto, utiliza una fuente instalada en overleaf. 
+% Éstas son algunas que van bien con la plantilla:
+%\setmainfont{Alegreya Sans}
+%\setmainfont{Carlito}
+%\setmainfont{PT Sans}
+%\setmainfont{Aroania}
+% Latin Modern Roman viene con la propia distribución LaTeX (no depende de
+% fuentes instaladas en el sistema operativo), por lo que compila igual en
+% cualquier máquina/Overleaf. Calibri está disponible en este equipo si se
+% prefiere el aspecto original: \setmainfont[Ligatures={NoRequired,NoCommon,NoContextual}]{Calibri}
+\setmainfont{Latin Modern Roman}
+% -------------------------------
+% Preámbulo
+% -------------------------------
+\frontmatter 
+\input{elements/front_matter}
+
+% -------------------------------
+% Índices y tablas
+% -------------------------------
+\tableofcontents    % Índice
+\listoffigures      % Índice de figuras
+\listoftables       % Índice de tablas
+\listofalgorithms   % Índice de algoritmos (comentar si no los hay)
+\listofcodes        % Índice de códigos (comentar si no los hay)
+\cleardoublepage
+
+% -------------------------------
+% Documento
+% -------------------------------
+\mainmatter
+% Estilo de página
+\pagestyle{fancy}
+
+% Chapter 1: Introduction
+\input{chapters/ch01_introduction}
+
+% Chapter 2: State of the art
+\input{chapters/ch02_state_of_the_art}
+
+% Chapter 3: File systems under study
+\input{chapters/ch03_filesystems_under_study}
+
+% Chapter 4: Methodology
+\input{chapters/ch04_methodology}
+
+% Chapter 5: Detailed results
+\input{chapters/ch05_detailed_results}
+
+% Chapter 6: Results conclusions
+\input{chapters/ch06_results_conclusions}
+
+% Chapter 7: Conclusions and recommendations
+\input{chapters/ch07_conclusions_recommendations}
+
+% Chapter 8: Related work
+\input{chapters/ch08_related_work}
+
+% Chapter 9: Reliability threats
+\input{chapters/ch09_reliability_threats}
+
+% Chapter 10: Conclusions and future work
+\input{chapters/ch10_conclusions_future_work}
+
+% -------------------------------
+% Bibliografía
+% -------------------------------
+
+\printbibliography
+\addcontentsline{toc}{chapter}{Referencia bibliográfica}\label{Bibliografía} % Añade a la tabla de contenidos
+
+% -------------------------------
+% Apéndices
+% -------------------------------
+\appendix
+\chapter{Anexo 1} \label{sec:anexo}
+
+La siguiente tabla presenta una recopilación de distribuciones de Linux junto con su sistema de archivos por defecto y versión correspondiente. Estos datos han sido obtenidos de la información disponible en la página de Wikipedia sobre distribuciones de Linux \cite{wiki-linux-distributions}. La tabla incluye una variedad de distribuciones conocidas, junto con detalles sobre los sistemas de archivos que utilizan y las versiones más recientes disponibles hasta la fecha de recopilación.
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Distribución} & \textbf{Sistema de archivos por defecto} & \textbf{Versión} \\
+\hline
+Alpine Linux & ext4, brtfs, jfs, xfs & 3.15.1 \\
+ALT Linux & ext4, zfs & 9.1 \\
+Arch Linux & reiserfs, xfs, jfs, zfs, ext4,brtfs & 01/02/2024 \\
+Bodhi Linux & ext4 & 6.0.0 \\
+CentOS & xfs, zfs & 8.5-2.2105 \\
+Chakra & ext4 & 04/2021 \\
+ClearOS & ext3 & 7.7 \\
+CoreOS & ext4 & 2512.3.0 \\
+Debian & ext4 & 11.2 \\
+Devuan & ext4 & 4.0.0 \\
+Dragora GNU/Linux-Libre & ext4 & 3.0-rc1 \\
+Fedora & brtfs, jfs, xfs & 35 \\
+Funtoo & ext4, xfs, zfs, brtfs & 1.4 \\
+Gentoo & reiserfs, xfs, jfs, zfs, ext4,brtfs & 30/01/2022 \\
+Guix System & ext4 & 1.4.0 \\
+Hyperbola GNU/Linux-libre & ext4, brtfs, jfs, xfs & 0.4.4 \\
+Kali Linux & ext3 & 4/2023 \\
+Knoppix & xfs & 9.3 \\
+LibreCMC & ext4 & 1.5.14 \\
+Linux Mint & ext4 & 21.3 \\
+Mageia & ext4 & 9 \\
+Manjaro Linux & ext4 & 01/05/2022 \\
+MIRACLE LINUX & ext4 & 9 \\
+NixOS & ext4, xfs, brtfs & 2.20.3 \\
+openSUSE & brtfs, xfs & 15.5 \\
+OpenWrt & overlayfs+SquashFS/JFFS2 & 23.05.2 \\
+Oracle Linux & ext4 & 9.3 \\
+Parabola GNU/Linux-libre & reiserfs, xfs, jfs, zfs, ext4,brtfs & 01/04/2024 \\
+Pardus & ext4 & 23.1 \\
+Parted Magic & ext4 & 22/11/2023 \\
+PCLinuxOS & ext4 & 01/12/2022 \\
+Pop! OS & ext4 & 22.04 LTS \\
+Pentoo & SquashFS & 2019.1 \\
+Porteus & ext2, ext3, ext4, reiser, xfs & 5.01 \\
+Puppy Linux & SquashFS containing ext2 & 9.5 \\
+PureOS & ext4 & 10.3 \\
+Qubes OS & ext4 & 4.2.0 \\
+Red Hat Enterprise Linux (RHEL) & xfs & 9.3 \\
+Rocks Cluster Distribution & ext4 & 7.0 \\
+Rocky Linux & ext4 & 9.3 \\
+ROSA & ext4, brtfs & 12.4 \\
+Sabayon Linux & ext4 & 19.03 \\
+Salix OS & ext4 & 15.0 \\
+Slackware & ext4, ext3, ext2, reiserfs, brtfs, xfs & 15.0 \\
+Slax & SquashFS & 12.2.0 \\
+SliTaz GNU/Linux & ext3 & 10/10/2023 \\
+Solus & ext4 & 4.5 \\
+Source Mage GNU/Linux & ext2 & 0.62-11 \\
+SteamOS & ext4 & 3.5.7 \\
+SUSE Linux Enterprise & btrfs & 15 \\
+Tails & ext4 & 5.22 \\
+Tiny Core Linux & brtfs & 14.0 \\
+Trisquel & ext4, xfs & 11.0 \\
+TurnKey GNU/Linux & ext4 & 18.0 \\
+Ubuntu/Edubuntu & ext4 & 23.10.1 \\
+Ubuntu GNOME & ext4 & 23.10.1 \\
+Ubuntu MATE & ext4, brtfs & 23.10.1 \\
+Kubuntu & ext4, brtfs & 23.10.1 \\
+Xubuntu & ext4, brtfs & 23.10.1 \\
+Lubuntu & ext4, brtfs & 23.10.1 \\
+VectorLinux & ReiserFS & 7.2 \\
+Void Linux & xfs, zfs, ext4, f2fs, brtfs  & 28/06/2023 \\
+Zentyal & ext4 & 7.1.0 \\
+Zenwalk & ext4 & 15.0-221106 \\
+\hline
+\end{longtable}
+
+
+\cleardoublepage
+\thispagestyle{empty}
+
+\end{document}

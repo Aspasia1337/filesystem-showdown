@@ -1,0 +1,50 @@
+\chapter{Conclusiones y Recomendaciones}
+
+En resumen, \textbf{Btrfs demostró ser el sistema de archivos más eficiente en la gestión de archivos pequeños y en operaciones de relectura y reescritura}, gracias a su técnica de subasignación de bloques y escritura diferida. \textbf{XFS destacó en la gestión de archivos grandes} debido a sus grupos de asignación. \textbf{Ext4 mostró un rendimiento consistente pero inferior a Btrfs y XFS} en la mayoría de las pruebas. \textbf{ZFS, aunque penalizado por sus algoritmos de cifrado e integridad, ofreció una estabilidad notable en su rendimiento}, particularmente en operaciones de relectura.
+
+Estos resultados sugieren que la elección del sistema de archivos debe basarse en las necesidades específicas de uso, considerando el tamaño de los archivos y las operaciones predominantes (lectura, escritura, aleatoria, secuencial) para optimizar el rendimiento del sistema. La implementación de técnicas avanzadas de gestión de caché y optimización de acceso es crucial para maximizar la eficiencia y rendimiento de los sistemas de archivos.
+
+\section{Recomendaciones de Uso Según el Sistema de Archivos}
+
+A continuación, se presentan recomendaciones específicas basadas en los resultados de rendimiento para cada sistema de archivos evaluado:
+
+\subsection{Btrfs}
+
+Para aplicaciones que requieren un manejo eficiente de archivos pequeños y numerosas operaciones de lectura y relectura, \textbf{Btrfs es la opción más adecuada}. Ejemplos de estos casos de uso incluyen:
+
+\begin{itemize}
+    \item \textbf{Bases de Datos}: Btrfs es ideal para bases de datos donde las lecturas aleatorias de archivos pequeños son comunes. Su capacidad para manejar eficientemente la fragmentación y su alta velocidad en operaciones de relectura mejoran significativamente el rendimiento.
+    \item \textbf{Repositorios de Código Fuente}: En entornos de desarrollo, donde se realizan múltiples operaciones de lectura y escritura de archivos pequeños, Btrfs ofrece ventajas considerables debido a su técnica de subasignación de bloques.
+\end{itemize}
+
+\subsection{XFS}
+
+\textbf{XFS se destaca en la gestión de archivos grandes y operaciones de escritura intensiva}. Es especialmente adecuado para:
+
+\begin{itemize}
+    \item \textbf{Repositorios de Máquinas Virtuales}: Para entornos de virtualización donde se almacenan imágenes de máquinas virtuales grandes, XFS proporciona un rendimiento superior en escrituras secuenciales y aleatorias de archivos grandes.
+    \item \textbf{Sistemas de Almacenamiento de Video}: En aplicaciones que involucran el almacenamiento y procesamiento de grandes archivos de video, XFS es beneficioso debido a su manejo eficiente de grandes volúmenes de datos.
+\end{itemize}
+
+\subsection{Ext4}
+
+Ext4, aunque no lidera en ningún área específica, ofrece un \textbf{rendimiento consistente y es adecuado para una variedad de usos generales}:
+
+\begin{itemize}
+    \item \textbf{Servidores de Archivos}: Para servidores de archivos que manejan una mezcla de tamaños de archivos y patrones de acceso, Ext4 proporciona una buena combinación de rendimiento y estabilidad.
+    \item \textbf{Estaciones de Trabajo de Uso General}: En sistemas de escritorio o estaciones de trabajo donde las cargas de trabajo son variadas y no intensivas en ningún tipo específico de operación de E/S, Ext4 es una opción confiable.
+\end{itemize}
+
+\subsection{ZFS}
+
+\textbf{ZFS, con su enfoque en la integridad y seguridad de los datos, es ideal para aplicaciones donde la confiabilidad es crucial}:
+
+\begin{itemize}
+    \item \textbf{Sistemas de Copias de Seguridad}: ZFS es excelente para sistemas de respaldo debido a sus características avanzadas de integridad de datos y cifrado.
+    \item \textbf{Almacenamiento de Datos Críticos}: En entornos donde la protección de datos es primordial, como en servicios financieros o almacenamiento de datos de investigación, ZFS proporciona la robustez necesaria para asegurar la integridad de la información.
+\end{itemize}
+
+Estos casos de uso específicos permiten una mejor elección del sistema de archivos basado en las necesidades particulares de rendimiento y confiabilidad, asegurando así una optimización adecuada de los recursos y el desempeño del sistema.
+
+
+

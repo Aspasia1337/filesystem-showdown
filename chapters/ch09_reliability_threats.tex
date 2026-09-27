@@ -1,0 +1,69 @@
+\chapter{Desafíos a la fiabilidad}
+
+Este capítulo aborda los principales desafíos que pueden comprometer la fiabilidad de los resultados obtenidos en nuestro estudio comparativo de sistemas de ficheros basados en Linux. Estos desafíos se clasifican en tres categorías: validez de la conclusión, validez interna y validez externa. Además, se presentan estrategias para mitigar estos desafíos asegurando la integridad y aplicabilidad de los hallazgos.
+
+\section{Validez de la conclusión}
+
+\subsection{Baja calidad estadística}
+
+La solidez de los resultados puede verse afectada por una baja calidad estadística, que se refiere a problemas en el diseño y análisis de los datos que pueden llevar a conclusiones incorrectas o poco confiables. Este desafío puede surgir debido a factores que no estaban completamente bajo nuestro control, tales como:
+
+\begin{itemize}
+    \item \textbf{Tamaño de muestra limitado}: En algunos casos, el tamaño de la muestra puede haber sido insuficiente para detectar diferencias sutiles entre los sistemas de ficheros. Un número mayor de muestras podría haber proporcionado una representación más precisa y fiable de las capacidades de cada sistema.
+    \item \textbf{Variabilidad en las condiciones de prueba}: A pesar de nuestros esfuerzos por mantener un entorno de pruebas controlado, pequeñas variaciones en las condiciones del hardware y del software podrían haber introducido ruido en los datos, afectando la consistencia de los resultados.
+    \item \textbf{Herramientas estadísticas limitadas}: Aunque se utilizó software estadístico avanzado, ciertas limitaciones inherentes a las herramientas disponibles pueden haber restringido la profundidad y precisión de los análisis estadísticos realizados.
+\end{itemize}
+
+\subsection{Sesgo del método único}
+
+El uso de un único método de medición puede introducir sesgos en los resultados del estudio, ya que puede favorecer ciertos sistemas de ficheros sobre otros debido a las particularidades del método elegido. En nuestro estudio comparativo de sistemas de ficheros basados en Linux, este sesgo podría haber afectado nuestras conclusiones de las siguientes maneras:
+
+\begin{itemize}
+    \item \textbf{Favoritismo hacia ciertos sistemas de ficheros}: Al emplear un solo método de medición, existe el riesgo de que este método sea más adecuado para ciertos sistemas de ficheros que para otros. Por ejemplo, una métrica específica podría estar optimizada para un tipo de operación de entrada/salida que un sistema de ficheros maneja mejor que los demás, lo que podría dar la impresión de que ese sistema tiene un rendimiento superior en general.
+    \item \textbf{Interpretaciones sesgadas de los resultados}: Si las métricas utilizadas no capturan adecuadamente todas las dimensiones relevantes del rendimiento de los sistemas de ficheros, los resultados pueden no reflejar con precisión las capacidades reales de cada sistema. Esto puede llevar a conclusiones incorrectas sobre cuál sistema es más eficiente o adecuado para ciertos usos.
+    \item \textbf{Limitación en la representatividad de los resultados}: Dependiendo del método de medición elegido, los resultados obtenidos pueden no ser completamente representativos de las condiciones de uso reales. Por ejemplo, si las pruebas se centraron en operaciones de lectura/escritura secuenciales, es posible que no reflejen adecuadamente el rendimiento en operaciones multihilo, que son comunes en muchos entornos de producción.
+\end{itemize}
+
+\section{Validez interna}
+
+\subsection{Gestión de estados en cachés y buffers de entrada/salida}
+
+La gestión de estados en cachés y buffers de entrada/salida (E/S) puede afectar significativamente la validez interna de nuestro estudio, introduciendo variabilidad en los resultados de las pruebas. Este desafío puede haber afectado nuestras conclusiones de las siguientes maneras:
+
+\begin{itemize}
+    \item \textbf{Resultados inconsistentes}: Si los cachés y buffers no se gestionan adecuadamente, el estado inicial de cada prueba puede variar, lo que lleva a resultados inconsistentes. Por ejemplo, datos residuales en cachés podrían beneficiar a ciertos sistemas de ficheros, mostrando un rendimiento artificialmente alto.
+    \item \textbf{Influencia de datos previos}: La presencia de datos previos en los cachés y buffers podría influir en el rendimiento medido durante las pruebas, haciendo difícil distinguir entre el rendimiento real del sistema de ficheros y el impacto de los datos almacenados en cachés.
+    \item \textbf{Variabilidad en la carga de trabajo}: Diferencias en la carga de trabajo debido a la gestión inadecuada de los buffers de E/S pueden introducir ruido en los datos, dificultando la comparación precisa entre diferentes sistemas de ficheros.
+\end{itemize}
+
+Para paliar estos problemas y mejorar la validez interna de nuestro estudio, hemos realizado un reinicio del sistema después de cada prueba. Esto asegura que los cachés y buffers de E/S se vacíen y restablezcan, proporcionando condiciones iniciales consistentes para cada prueba subsiguiente. Esta estrategia de reinicio completo del sistema después de cada prueba nos ha permitido minimizar los efectos negativos de la gestión de estados en cachés y buffers de E/S, mejorando la consistencia y la validez de nuestros resultados.
+
+\subsection{Resiliencia ante fallos en discos}
+
+Aunque los fallos de discos no son comunes, podrían haber afectado los resultados de nuestro estudio de varias maneras:
+
+\begin{itemize}
+    \item \textbf{Interrupciones durante las pruebas}: Fallos inesperados en los discos podrían haber interrumpido las pruebas, llevando a resultados incompletos o inconsistentes. Esto puede introducir variabilidad en los datos y afectar la comparabilidad de los resultados.
+    \item \textbf{Degradación del rendimiento}: La presencia de fallos de sectores o desconexiones aleatorias de unidades de almacenamiento podría haber degradado el rendimiento de los sistemas de ficheros, dando una impresión errónea de sus capacidades reales bajo condiciones normales de operación.
+    \item \textbf{Recuperación de errores}: La capacidad de un sistema de ficheros para manejar y recuperarse de fallos de hardware es crucial. Sin embargo, si estos mecanismos de recuperación se activan durante nuestras pruebas, podrían alterar significativamente los resultados, reflejando más la resiliencia ante fallos que el rendimiento puro del sistema de ficheros.
+\end{itemize}
+
+Estos posibles efectos resaltan la importancia de considerar la resiliencia ante fallos en discos al interpretar los resultados de nuestro estudio.
+
+\section{Validez externa}
+
+\subsection{Condiciones externas}
+
+Las condiciones externas pueden haber afectado la validez de los resultados de nuestro estudio comparativo de sistemas de ficheros de varias maneras específicas:
+
+\begin{itemize}
+    \item \textbf{Actualizaciones automáticas del sistema}: Durante el período de pruebas, las actualizaciones automáticas del sistema operativo o del firmware pueden haber introducido cambios no deseados en el entorno de prueba, afectando el rendimiento de los sistemas de ficheros. Para solucionar este problema, deshabilitamos la conexión a la red durante las pruebas, evitando así cualquier actualización automática.
+    \item \textbf{Temperatura ambiente}: Cambios en la temperatura ambiente del laboratorio pueden afectar el rendimiento del hardware, como discos duros y unidades SSD, ya que el sobrecalentamiento puede provocar una reducción en la velocidad de procesamiento y afectaciones en la integridad de los datos.
+    \item \textbf{Interferencias electromagnéticas}: La presencia de dispositivos electrónicos que emiten interferencias electromagnéticas cerca del equipo de prueba puede haber afectado la precisión y consistencia de los resultados, especialmente en sistemas de almacenamiento sensibles a dichas interferencias.
+\end{itemize}
+
+\section{Consideraciones Finales}
+
+La revisión por pares, tanto interna como externa, de los protocolos experimentales y los resultados obtenidos ha ayudado a identificar posibles sesgos o errores. Se ha adoptado un enfoque iterativo para la mejora continua del diseño experimental, basado en la retroalimentación y los resultados de investigaciones anteriores. Esto garantiza que los hallazgos del estudio sean sólidos, fiables y aplicables a un amplio rango de escenarios.
+
+

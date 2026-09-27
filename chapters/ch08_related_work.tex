@@ -1,0 +1,36 @@
+\chapter{Trabajos relacionados}\label{sec:trabajos relacionados}
+
+Esta sección discute investigaciones prevas que han evaluado el rendimiento de los sistemas de ficheros, proporcionando un marco para entender las metodologías empleadas en este trabajo de fin de grado. Se hace especial énfasis en las comparativas entre los sistemas de ficheros Btrfs, ZFS, Ext4 y XFS, destacando los resultados clave y su aplicación al contexto actual del estudio.
+
+\subsection{Comparativa de sistemas de ficheros por Heger y Rodeh}
+
+Dominique A. Heger (2009) y Ohad Rodeh et al. (2013) realizaron estudios fundamentales en la evaluación de sistemas de ficheros, los cuales serán analizados en profundidad en esta sección.
+
+\subsubsection{Estudio de Heger}
+
+Heger comparó el rendimiento de los sistemas de ficheros Btrfs, ZFS y Ext4, utilizando el benchmark Flexible FileSystem Benchmark (FFSB) en un sistema RAID 10. En operaciones de escritura secuencial, encontró que Btrfs y Ext4 mostraban un rendimiento similar, mientras que ZFS superaba a ambos en la mayoría de los escenarios. Esto es interesante, pues en nuestro caso, utilizando un disco único, ZFS no lograba alcanzar este rendimiento reportado en el estudio mencionado. En cambio, en configuraciones RAID, ZFS parece ser la opción ideal \cite{heger2012fs}.
+
+\subsubsection{Investigación de Rodeh et al.}
+
+Rodeh y sus colaboradores evaluaron Btrfs, Ext4 y XFS usando el perfil Fileserver. Btrfs mostró el mayor rendimiento, seguido de cerca por Ext4 y XFS. Las pruebas de carga de trabajo OLTP y Webserver revelaron un rendimiento similar entre los tres sistemas, con una ligera ventaja para Btrfs en el perfil OLTP. Esto concuerda con nuestro estudio, ya que ambos sistemas de ficheros obtienen en la mayoría de las pruebas un rendimiento prácticamente idéntico para archivos medianos o grandes, tal como se observó en el estudio de Rodeh et al. \cite{rodeh2013btrfs}.
+
+\subsection{Comparación exhaustiva de características por Mathur et al.}
+
+En un estudio integral, Mathur et al. (2007) exploraron y compararon las características clave de los sistemas de ficheros Ext3, Ext4, XFS y Btrfs. Este análisis proporciona una visión completa de cómo cada sistema maneja las operaciones de entrada/salida, la eficiencia en el manejo de metadatos y el soporte para tecnologías avanzadas como el journaling y la creación de snapshots.
+
+Los autores destacaron la escalabilidad y la eficiencia de XFS en operaciones de gran volumen, mientras que Ext4 mostró mejoras significativas en el manejo de grandes archivos en comparación con su predecesor Ext3. Btrfs, conocido por su avanzada gestión de snapshots y características de recuperación de datos, fue evaluado por su rendimiento en entornos multi-thread, ofreciendo recomendaciones importantes para usuarios que requieren robustez y flexibilidad en la gestión de datos complejos \cite{mathur2007filesystem}.
+
+\subsection{Estudio de Leventhal}
+
+Adam Leventhal analizó en profundidad el sistema de ficheros ZFS en su artículo "ZFS: The Last Word in Filesystems" (2005). Este estudio es crucial para entender las innovaciones tecnológicas en la gestión de datos a gran escala, como la integridad de datos end-to-end y la escalabilidad.
+
+Leventhal destacó cómo ZFS utiliza un modelo de almacenamiento transaccional para asegurar la integridad de los datos, características fundamentales para el desarrollo de otros sistemas de ficheros modernos. El estudio también abordó las técnicas avanzadas de ZFS para el manejo de snapshots y la deduplicación de datos, ofreciendo perspectivas que han sido incorporadas en la evaluación de características similares en sistemas de ficheros como Btrfs. Este estudio es crucial, ya que respalda el rendimiento más bajo obtenido en nuestra comparativa para ZFS, debido al algoritmo de integridad que disminuye su rendimiento en todas las pruebas \cite{leventhal2005zfs}.
+
+\subsection{Estudio adicional por Chen et al.}
+
+En un estudio complementario, Chen et al. (2015) exploraron el impacto de las optimizaciones modernas de sistemas de ficheros en hardware de gama alta. El estudio se centró en la evaluación de las características de Ext4 y XFS en discos SSD, revelando que las optimizaciones para operaciones de entrada/salida pueden mejorar significativamente el rendimiento en comparación con los discos duros tradicionales \cite{chen2015optimization}.
+
+\subsection{Aportaciones finales}
+
+Estos estudios establecen una referencia crucial para examinar la evolución y el rendimiento de los diversos sistemas de ficheros. Los resultados brindan una visión detallada de cómo Btrfs, Ext4 y XFS han manejado variados escenarios y cargas de trabajo, lo que resulta esencial para comprender y justificar el rendimiento observado en nuestras pruebas. Además, estos hallazgos son fundamentales para diseñar adecuadamente el entorno de pruebas, asegurando que las evaluaciones reflejen de manera precisa las capacidades y limitaciones de cada sistema de ficheros.
+

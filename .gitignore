@@ -1,0 +1,36 @@
+# LaTeX compilation output
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lot
+*.lof
+*.xdv
+*.run.xml
+*.bcf
+*.loalgorithm
+*.locode
+
+# IDE
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Development
+*.tmp
+.env
+.env.local
+
+# Keep PDFs
+!*.pdf
